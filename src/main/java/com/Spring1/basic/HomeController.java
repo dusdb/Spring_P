@@ -15,8 +15,11 @@ public class HomeController {
 
     private int count;
 
+    private List<Person> people;
+
     public HomeController(){
         count=-1;
+        people=new ArrayList<>();
     }
 
 
@@ -213,5 +216,40 @@ public class HomeController {
         }};
 
         return list;
+    }
+
+    @AllArgsConstructor
+    @Getter
+    class Person{
+        private static int lastId;
+        private final int id;
+        private final String name;
+        private final int age;
+
+        static{
+            lastId=0;
+        }
+
+        public Person(String name, int age){
+            this(++lastId, name, age);
+        }
+    }
+
+    @GetMapping("/home/addPerson")
+    @ResponseBody
+    public String addPerson(String name, int age){
+        Person p=new Person(name, age);
+
+        people.add(p);
+
+        return "%d번 사람이 추가되었습니다.".formatted(p.getId());
+    }
+
+    @GetMapping("/home/people")
+    @ResponseBody
+    public List<Person> showPeople(){
+
+
+        return people;
     }
 }
