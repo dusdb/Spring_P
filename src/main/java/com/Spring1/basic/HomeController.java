@@ -223,8 +223,10 @@ public class HomeController {
     class Person{
         private static int lastId;
         private final int id;
-        private final String name;
-        private final int age;
+        @Setter
+        private String name;
+        @Setter
+        private int age;
 
         static{
             lastId=0;
@@ -262,5 +264,24 @@ public class HomeController {
             return "%d번 사람이 존재하지 않습니다.".formatted(id);
 
         return "%d번 사람이 삭제되었습니다.".formatted(id);
+    }
+
+    @GetMapping("/home/modifyPerson")
+    @ResponseBody
+    public String modifyPerson(int id, String name, int age){
+
+        Person found=people.stream()
+                .filter(p -> p.getId()==id) //해당 조건이 참인것만 필터링
+                .findFirst() //필터링 결과가 하나만 남는데, 그 하나 남은걸 가져옴
+                .orElse(null); //결과가 없으면 null을 반환
+
+        if(found==null)
+            return "%d번 사람이 존재하지 않습니다.".formatted(id);
+            
+        found.setName(name);
+        found.setAge(age);
+
+        return "%d번 사람이 수정되었습니다.".formatted(id);
+
     }
 }
