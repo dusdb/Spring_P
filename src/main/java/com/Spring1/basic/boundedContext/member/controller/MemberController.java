@@ -3,6 +3,7 @@ package com.Spring1.basic.boundedContext.member.controller;
 
 import com.Spring1.basic.boundedContext.base.rsData.RsData;
 import com.Spring1.basic.boundedContext.member.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -11,8 +12,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MemberController {
     private final MemberService memberService;
 
-    public MemberController(){
-        memberService=new MemberService();
+    @Autowired
+    public MemberController(MemberService memberService){
+        this.memberService=memberService;
     }
 
     @GetMapping("/member/login")
