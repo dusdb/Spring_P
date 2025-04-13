@@ -1,4 +1,4 @@
-package com.Spring1.basic;
+package com.Spring1.basic.boundedContext.home.controller;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
