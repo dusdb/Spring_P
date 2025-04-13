@@ -24,11 +24,13 @@ public class HomeController {
     private List<Person> people;
 
     @Autowired
-    private MemberService memberService;
+    private final MemberService memberService;
 
-    public HomeController(){
+    public HomeController(MemberService memberService){
         count=-1;
         people=new ArrayList<>();
+
+        this.memberService=memberService;
     }
 
 
