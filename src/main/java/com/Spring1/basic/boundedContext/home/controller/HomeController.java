@@ -1,5 +1,7 @@
 package com.Spring1.basic.boundedContext.home.controller;
 
+import com.Spring1.basic.boundedContext.member.entity.Member;
+import com.Spring1.basic.boundedContext.member.service.MemberService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,9 +22,13 @@ public class HomeController {
 
     private List<Person> people;
 
+    private MemberService memberService;
+
     public HomeController(){
         count=-1;
         people=new ArrayList<>();
+
+        memberService=new MemberService();
     }
 
 
@@ -308,4 +314,9 @@ public class HomeController {
         return countInCookie;
     }
 
+    @GetMapping("home/user1")
+    @ResponseBody
+    public Member showUser1(){
+        return memberService.findByUserName("user1");
+    }
 }
