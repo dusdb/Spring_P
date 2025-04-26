@@ -298,14 +298,14 @@ public class HomeController {
 
     @GetMapping("home/cookie/increase")
     @ResponseBody
-    public int showCookieIncrease(HttpServletRequest req, HttpServletResponse res){
-        int countInCookie=0;
+    public long showCookieIncrease(HttpServletRequest req, HttpServletResponse res){
+        long countInCookie=0;
 
         if(req.getCookies() != null){
             countInCookie=Arrays.stream(req.getCookies())
                     .filter(cookie -> cookie.getName().equals("count"))
                     .map(cookie -> cookie.getValue())
-                    .mapToInt(Integer::parseInt)
+                    .mapToLong(Long::parseLong)
                     .findFirst()
                     .orElse(0);
         }

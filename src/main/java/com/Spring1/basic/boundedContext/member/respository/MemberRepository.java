@@ -25,6 +25,13 @@ public class MemberRepository {
         members.add(new Member("peace","123413"));
     }
 
+    public Member findById(long id) {
+        return members.stream()
+                .filter(member -> member.getId()==id)
+                .findFirst()
+                .orElse(null);
+    }
+
     public Member findByUserName(String username) {
         return members.stream()
                 .filter(member -> member.getUsername().equals(username))

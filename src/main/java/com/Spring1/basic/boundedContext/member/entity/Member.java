@@ -8,7 +8,7 @@ import lombok.Data;
 public class Member {
 
     private static int lastId;
-    private final int id;
+    private final long id;
     private final String username;
     private final String password;
 
